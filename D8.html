@@ -42,7 +42,7 @@
       */
 
       const changeUrls = function () {
-        let getEveryLink = document.getElementById('link') //don't understand why query selector won't work
+        let getEveryLink = document.getElementById('link')
         getEveryLink.setAttribute("href", "http://www.google.com")
       };
 
@@ -63,17 +63,19 @@
         container.appendChild(newItem)
       };
 
-      /* EXERCISE 6 - not working somehow
+      /* EXERCISE 6 - //- this is still not working
       Write a function for adding a second paragraph to the div.
       */
 
       const addParagraph = function () {
         //find all the divs
-        let getAllDiv = document.querySelectorAll("div")
+        let getAllDivs = document.querySelectorAll("div")
         //create new p
         let newP = document.createElement("p")
         //assign p to all div
-        getAllDiv.appendChild(newP)
+        for (let div in getAllDivs){
+          div.appendChild(newP) 
+        }
       };
 
       /* EXERCISE 7
