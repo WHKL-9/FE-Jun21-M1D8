@@ -1,0 +1,197 @@
+<html>
+  <head>
+    <script>
+      /* EXERCISE 1
+      Write a function for changing the title of the document in something else.
+      */
+
+      const changeTitle = function (newTitle) {
+        //to find the new page title user wrote
+        let pageTitleInput = document.getElementById("page-title")
+        let pageTitle = pageTitleInput.value
+
+        let currentPageTitle = document.querySelector("h1")
+        currentPageTitle.innerText = pageTitle
+
+      };
+
+      /* EXERCISE 2 - not done yet 
+      Write a function for changing the class of the title of the page in "myHeading".
+      */
+
+      const addClassToTitle = function () {
+        //
+      };
+
+      /* EXERCISE 3
+      Write a function for changing the text of only the p which are children of a div.
+      */
+
+      const changePcontent = function () {
+        let currentPContent = document.querySelector("div p")
+        let newPContent = currentPContent.style.color = "blue"
+      }; 
+      
+      const changeBackPcontent = function () {
+        let currentPContent = document.querySelector("div p")
+        let newPContent = currentPContent.style.color = "black"
+      };
+
+      /* EXERCISE 4
+      Write a function for changing the destination of every link to https://www.google.com
+      */
+
+      const changeUrls = function () {
+        let getEveryLink = document.getElementById('link') //don't understand why query selector won't work
+        getEveryLink.setAttribute("href", "http://www.google.com")
+      };
+
+      /* EXERCISE 5 
+       Write a function for adding a new item in the second list.
+       */
+
+      const addToTheSecond = function () {
+        //get the user input 
+        let userItem = document.getElementById("user-item")
+        userItem = userItem.value
+        //assign user input to the empty list 
+        let newItem = document.createElement("li")
+        newItem.innerHTML = userItem
+        //find the parent container
+        let container = document.getElementById("secondList")
+        //add user input into the current list 
+        container.appendChild(newItem)
+      };
+
+      /* EXERCISE 6 - not working somehow
+      Write a function for adding a second paragraph to the div.
+      */
+
+      const addParagraph = function () {
+        //find all the divs
+        let getAllDiv = document.querySelectorAll("div")
+        //create new p
+        let newP = document.createElement("p")
+        //assign p to all div
+        getAllDiv.appendChild(newP)
+      };
+
+      /* EXERCISE 7
+      Write a function for making the first UL disappear.
+      */
+
+      const firstUlDisappear = function () {
+        //
+      };
+
+      /* EXERCISE 8
+      Write a function for making the background of every UL green.
+      */
+
+      const paintItGreen = function () {
+        //
+      };
+
+      /* EXERCISE 9
+      Make the heading of the page change color every time the user clicks on it.
+      */
+
+      const makeItClickable = function () {
+        //
+      };
+
+      /* EXERCISE 10
+      Change the footer text with something else when the user clicks on it.
+      */
+
+      const changeFooterText = function () {
+        //
+      };
+
+      /* EXERCISE 11
+      Attach an event listener to the input field in the page for console logging its value just after any keystroke.
+      */
+
+      const inputField = document.getElementById("input-field");
+      // ...
+
+      /* EXERCISE 12
+      Create a new welcome alert message when the page successfully loads.
+      */
+
+      window.onload = function () {
+        //
+      };
+
+      /* EXERCISE 13
+      Use HTML5 tags to divide the content of the page in a more semantic way.
+      */
+    </script>
+
+    <style>
+      .myHeading {
+        color: red;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>This is the title of the page</h1>
+      <br /><br />
+      <label for="page-title">New Page Title:</label>
+      <input id="page-title" type="text" placeholder="write your new page title" />
+      <button onclick="changeTitle()">Change the Page Title</button>
+      <br /><br />
+
+      <h2>This is the subtitle of the page</h2>
+    </header>
+
+    <main>
+      <hr />
+
+      <ul id="firstList">
+        <li>1st</li>
+        <li>2nd</li>
+        <li>3rd</li>
+      </ul>
+
+      <ul id="secondList">
+        <li>1st</li>
+        <li>2nd</li>
+        <li>3rd</li>
+      </ul>
+        <input id="user-item" type="text" placeholder="Tell me what you want" />
+        <br/>
+        <button onclick="addToTheSecond()">Click to add new item on list</button>
+        <br/>
+        <br/>
+
+
+
+      <a id= "link" href="strive.school">This link goes to Strive School</a>
+      <button onclick="changeUrls()">Click me and click on any link</button>
+
+      <div>
+        <p>This text is just for the exercise</p>
+        <button onclick="changePcontent()">Change P Content on click</button>
+        <button onclick="changeBackPcontent()">Original P Content</button>
+        <br /><br />
+        <button onclick="addParagraph">Add a paragraph</button>
+        <br />
+      </div>
+
+      <div>
+        <br /><br />
+        <input
+          type="text"
+          id="input-field"
+          placeholder="input field for the exercise"
+        />
+      </div>
+    </main>
+
+    <footer>
+      <p>And this text is just for the exercise too!</p>
+    </footer>
+  </body>
+</html>

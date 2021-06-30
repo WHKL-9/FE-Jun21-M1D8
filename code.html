@@ -1,0 +1,185 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+
+    <title>Accessing Elements in the DOM</title>
+
+
+    <style>
+      html {
+        font-family: sans-serif;
+        color: #333;
+      }
+      body {
+        max-width: 500px;
+        margin: 0 auto;
+        padding: 0 15px;
+      }
+      div div,
+      div article {
+        padding: 10px;
+        margin: 5px;
+        border: 1px solid #dedede;
+      }
+
+      .selected {
+        color: orange;
+        border-radius: 6px;
+        border-width: 2px;
+        border-color: orange;
+        border-style: solid;
+        padding: 4px;
+      }
+    </style>
+  </head>
+
+
+  <body>
+
+
+    <script lang="text/javascript">
+
+        let toggleSelectedDiv = function(){
+
+            // alert("I'm changing your demo-id element")
+            let divDemo = document.getElementById("demo-id")
+            divDemo.classList.toggle("selected")
+        }
+
+        let toggleAllHeaders = function(){
+            
+            let allOurHeaders = document.querySelectorAll("h2")
+
+            /* ---- This is just a longer version of the bottom alternative
+            
+            for (let i = 0; i < allOurHeaders.length; i++){
+                let header = allOurHeaders[i]
+                header.classList.toggle("selected")
+            } */
+
+            for (let header of allOurHeaders){
+                header.classList.toggle("selected")
+            }
+        }
+
+        let createNewElement = function(event){
+
+            // ---- Let's find the username the user wrote
+            let usernameInput = document.getElementById("user-name")
+            let username = usernameInput.value
+
+            // ---- Let's create a new article element
+            let newElement = document.createElement("article") 
+            // Creates this HTML code: <article></article>
+            newElement.innerText = "Hi, I'm " + username + " X:" + event.screenX + " Y:" + event.screenY
+            // <article>Hi, I'm the new guy here</article>
+            newElement.style.color = "green"
+            // <article style="color:green;">Hi, I'm the new guy here</article>
+            newElement.id = "new-id"
+            // <article id="new-id" style="color:green;">Hi, I'm the new guy here</article>
+            
+            // ---- We also want to put the current time in the element's text
+            let currentTime = new Date()
+            let currentFormattedTime = ` ${currentTime.getHours()}:${currentTime.getMinutes()}:${currentTime.getSeconds()}`
+            newElement.innerText += currentFormattedTime // <article>Hi, I'm the new guy here (12:56:22)</article>
+
+            // ---- React to mouse clicks with removing the element itself
+            // ALTERNATIVE 1 
+            // newElement.onclick = removeTheElement
+
+            // ALTERNATIVE 2
+            newElement.addEventListener("click", removeTheElement)
+
+            // ---- It still lives in memory only, it's not ATTACHED to the DOM yet
+            console.log(newElement)
+
+            // ---- Let's find the parent of our newly created element
+            let container = document.getElementById("article-container")
+
+            // ---- Let's append the newly created element as the last child of the 'container' parent
+            container.appendChild(newElement)
+
+            // ---- Let's remove the button so the user can create just a single element
+            let buttonIWantToDelete
+
+            // -- Weakest alternative: it works even when we cannot change HTML source code, but it's not reliable and it fails if another button is added before this
+            // buttonIWantToDelete = document.getElementsByTagName("button")[1]
+
+            // -- Whenever you want to modify a SINGLE element, and you can change HTML code, best way would be to ASSIGN AN ID to that element, and then get it through getElementById()
+            buttonIWantToDelete = document.getElementById("create-new-element-button")
+
+            // Here we remove the element from the DOM itself
+            buttonIWantToDelete.remove()
+        }
+
+        const removeTheElement = function(event){
+            alert("I'm removing the elment you clicked! " + event.screenX)
+        }
+        
+        window.onload = function(){
+            createNewElement({})
+        }
+
+    </script>
+
+
+
+    <h1>Accessing Elements in the DOM!</h1>
+
+    <button onclick="toggleSelectedDiv()">Toggle demo-id class!</button>
+    <input onclick="toggleAllHeaders()" type="button" value="Toggle all the headers!" />
+    <button id="create-new-element-button" onclick="createNewElement(event)">Create a new element!</button>
+
+    <br /><br />
+    <label for="user-name">Username:</label>
+    <input id="user-name" type="text" placeholder="Write you username here" />
+
+    <div>
+      <h2 id="demo-id">ID (#demo-id)</h2>
+      <div>Access me by ID</div>
+    </div>
+
+
+    <div>
+      <h2>Class (.demo-class)</h2>
+      <div class="demo-class">Access me by class (1)</div>
+      <div class="demo-class">Access me by class (2)</div>
+    </div>
+
+
+    <div>
+      <h2>Tag (article)</h2>
+      <div id="article-container">
+        <article>Access me by tag (1)</article>
+        <article>Access me by tag (2)</article>
+      </div>
+    </div>
+
+
+    <div id="demo-query">
+      <h2>Query Selector</h2>
+      <div>Access me by query</div>
+    </div>
+
+
+    <div>
+      <h2>Query Selector All</h2>
+      <div class="demo-query-all">Access me by query all (1)</div>
+      <div class="demo-query-all">Access me by query all (2)</div>
+    </div>
+
+
+    <h2>A more complex query</h2>
+    <div id="more-complex">
+      <ul>
+        <li>First element inside a list</li>
+        <li>Second element inside a list</li>
+        <li>Third element inside a list</li>
+      </ul>
+    </div>
+  </body>
+</html> 
