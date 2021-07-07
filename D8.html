@@ -15,13 +15,15 @@
 
       };
 
-      /* EXERCISE 2 - not done yet 
+      /* EXERCISE 2 - not done  
       Write a function for changing the class of the title of the page in "myHeading".
       */
 
-      const addClassToTitle = function () {
-  
-      };
+      // const addClassToTitle = function () {
+      //   let title = document.getElementsByTagName("h1")
+      //   title.classList.add("myHeading")
+      // };
+      // addClassToTitle()
 
       /* EXERCISE 3
       Write a function for changing the text of only the p which are children of a div.
@@ -40,11 +42,17 @@
       /* EXERCISE 4
       Write a function for changing the destination of every link to https://www.google.com
       */
-
+      //realize afterwards this will not work with every link - got to use queryselectorall with for loop 
       const changeUrls = function () {
-        let getEveryLink = document.getElementById('link')
-        getEveryLink.setAttribute("href", "http://www.google.com")
+        let getEveryLink = document.querySelectorAll("a")
+        getEveryLink.forEach((link) =>{
+          link.href = "https://www.google.com";
+        })
       };
+      changeUrls()
+      
+       // getEveryLink.setAttribute("href", "http://www.google.com")
+    
 
       /* EXERCISE 5 
        Write a function for adding a new item in the second list.
@@ -70,13 +78,22 @@
       const addParagraph = function () {
         //find all the divs
         let getAllDivs = document.querySelectorAll("div")
+        //console.log(getAllDivs)
         //create new p
-        let newP = document.createElement("p")
+       
+      //we need to create each p to a new div - analogy: we can't put the same person into 2 restaurants
+
+        //getAllDivs[0].appendChild(newP)
         //assign p to all div
-        for (let div in getAllDivs){
-          div.appendChild(newP) 
-        }
+        for (let div of getAllDivs){
+          let newP = document.createElement("p")
+          newP.innerText = "new paragraph"  
+          div.appendChild(newP)
+      }
       };
+
+      //find out all difference getelementbyid, getelementbytagnames, querrselector etc. 
+
 
       /* EXERCISE 7
       Write a function for making the first UL disappear.
@@ -112,8 +129,13 @@
       */
 
       const changeFooterText = function () {
+        const footer = document.querySelector("footer")
+        footer.addEventListener("click", function(e){
+          e.target.innerText = "text changed"
+        })
         //
       };
+      //changeFooterText()
 
       /* EXERCISE 11
       Attach an event listener to the input field in the page for console logging its value just after any keystroke.
@@ -185,7 +207,7 @@
         <button onclick="changePcontent()">Change P Content on click</button>
         <button onclick="changeBackPcontent()">Original P Content</button>
         <br /><br />
-        <button onclick="addParagraph">Add a paragraph</button>
+        <button onclick="addParagraph()">Add a paragraph</button>
         <br />
       </div>
 
@@ -201,6 +223,7 @@
 
     <footer>
       <p>And this text is just for the exercise too!</p>
+      <button onclick="changeFooterText()">Change Footer Text</button>
     </footer>
   </body>
 </html>
